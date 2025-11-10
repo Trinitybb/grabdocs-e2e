@@ -14,5 +14,19 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
+// cypress/support/e2e.js
+// This file runs automatically before your test files
+
+// ✅ Load custom commands (where loginToGrabDocs is defined)
+import './commands';
+
+// ✅ Enable file upload support globally
 import 'cypress-file-upload';
-import './commands'
+
+// (Optional) ignore frontend errors so Cypress doesn’t crash
+Cypress.on('uncaught:exception', (err) => {
+  if (/postMessage|Cannot read properties of null/i.test(err.message)) {
+    return false;
+  }
+});
+

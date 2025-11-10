@@ -23,3 +23,23 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+// cypress/support/commands.js
+
+// Helper to log into GrabDocs
+Cypress.Commands.add('loginToGrabDocs', () => {
+  const EMAIL = Cypress.env('EMAIL') || 'purpooh06@gmail.com';
+  const PASS  = Cypress.env('PASSWORD') || 'purpooh06';
+  const OTP   = Cypress.env('OTP');
+
+  cy.visit('https://grabdocs.com/', { timeout: 60000 });
+  cy.contains(/Log in|Sign in/i, { timeout: 20000 }).click({ force: true });
+
+  cy.origin('https://app.grabdocs.com', { args: { EMAIL, PASS, OTP } }, ({ EMAIL, PASS, OTP }) => {
+    cy.location('pathname', { timeout: 30000 }).should('match', /login|signin/i);
+    cy.get('input[type="email"], input[name="email"]').first().type(EMAIL);
+    cy.get('input[type="password"], input[name="password"]').first().type(PASS, { log: false });
+    cy.contains(/Log in|Sign in/i).click();
+
+    cy.contains(/Documents|New Document|Dashboard|Home/i, { timeout: 60000 }).should('be.visible');
+  });
+});

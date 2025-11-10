@@ -1,20 +1,16 @@
-const { defineConfig } = require('cypress');
-require('dotenv').config();
+const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
-  projectId: 'wrfenz',
   e2e: {
-    baseUrl: 'https://grabdocs.com',
-    viewportWidth: 1280,
-    viewportHeight: 800,
-    video: true,
-    env: {
-      EMAIL: process.env.CYPRESS_EMAIL,
-      PASSWORD: process.env.CYPRESS_PASSWORD,
-      OTP: process.env.CYPRESS_OTP
-    },
+   chromeWebSecurity: false,        // 🔓 allows cross-origin iframes
+    experimentalSessionAndOrigin: true, 
     setupNodeEvents(on, config) {
-      // you can modify config here if needed
+      // inject login credentials here
+      config.env = {
+        EMAIL: "purpooh6@gmail.com",
+        PASSWORD: "purpooh06",
+        OTP: "", // leave blank unless you use 2FA
+      };
       return config;
     },
   },

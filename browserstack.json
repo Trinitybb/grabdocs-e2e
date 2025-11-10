@@ -1,0 +1,29 @@
+{
+  "auth": {
+    "username": "bowlingt_VCdNkq",
+    "access_key": "JaoWgsvSpHHK8xCJJPd2"
+  },
+  "browsers": [
+    {
+      "browser": "chrome",
+      "os": "Windows",
+      "os_version": "11"
+    }
+  ],
+  "run_settings": {
+    "cypress_config_file": "./cypress.config.js",
+    "project_name": "GrabDocs E2E Tests",
+    "build_name": "Build #1",
+    "parallels": 1,
+    "spec_timeout": 120,
+    "npm_dependencies": {
+    "cypress": "^15.6.0"
+    }
+  },
+  "connection_settings": {
+    "local": false
+  },
+  "disable_usage_reporting": true,
+  "testObservability": false
+}
+
